@@ -14,9 +14,11 @@ np.random.seed(42)
 pesos = np.random.rand(2,1)
 print(pesos)
 
+learning_rate = 0.1
+epochs = 10000
 
 for epoch in range (epochs):
-    entrada_ponderada = np.dor(entradas.pesos) + bias
+    entrada_ponderada = np.dot(entradas.pesos) + bias
     salida = sigmoid(entrada_ponderada)
 
     error = salidas_esperadas - salida
@@ -24,8 +26,8 @@ for epoch in range (epochs):
     ajuste = error * sigmoid_derivada(salida)
 
 
-    pesos += np.dot(entradas.T, ajuste) * learning
+    pesos += np.dot(entradas.T, ajuste) * learning_rate
     bias += np.sum(ajuste) * learning_rate
 
     if epoch % 1000 ==0:
-        print(f"Epoca (Ñepoch),Error")
+        print(f"Epoca {epoch},Error: {np.mean(np.abs(error))}")
